@@ -55,7 +55,12 @@ public class PlayerLogic : MonoBehaviour
     {
         isSprinting = context.ReadValueAsButton();
     }
-
+    public CursorDragDrop cursorDragDrop;
+    public void Grab(InputAction.CallbackContext context)
+    {
+        cursorDragDrop.OnGrab(context);
+    }
+    
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && isGrounded)
