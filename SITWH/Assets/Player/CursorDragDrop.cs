@@ -3,88 +3,58 @@ using UnityEngine.InputSystem;
 
 public class CursorDragDrop : MonoBehaviour
 {
-    [Header("Cursor Settings")]
     [SerializeField] private Sprite cursorSprite;
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color hoverColor = Color.yellow;
     [SerializeField] private Color grabColor = Color.green;
     [SerializeField] private Vector2 cursorOffset = new Vector2(0f, -100f);
 
-    [Header("Grab Settings")]
     [SerializeField] private float grabDistance = 5f;
     [SerializeField] private float throwForce = 5f;
-    [SerializeField] private LayerMask grabMask = -1;
+    [SerializeField] private LayerMask grabMask;
 
-    [Header("Hold Settings")]
     [SerializeField] private float holdDistance = 2f;
-    [SerializeField] private float smoothFollowSpeed = 10f;
-    [SerializeField] private Vector3 holdRotationOffset = Vector3.zero;
+    [SerializeField] private float smoothFollowSpeed = 15f;
+    [SerializeField] private float verticalHoldOffset = -0.4f;
 
     private Camera mainCamera;
     private SpriteRenderer cursorRenderer;
-    private GameObject grabbedObject;
     private Rigidbody grabbedRigidbody;
     private Vector2 screenCenter;
     private Vector3 currentHoldPosition;
     private bool isGrabbing;
     private bool canGrab;
-    private Collider hoveredObject;
 
     void Awake()
     {
-        // Buscar la cámara principal de forma segura
         mainCamera = Camera.main;
         if (mainCamera == null)
         {
-            // Buscar cualquier cámara en la escena
-            Camera[] cameras = FindObjectsOfType<Camera>();
-            if (cameras.Length > 0)
+            Camera[] cams = FindObjectsOfType<Camera>();
+            if (cams.Length == 0)
             {
-                mainCamera = cameras[0];
-                Debug.Log("Cámara asignada: " + mainCamera.name);
-            }
-            else
-            {
-                Debug.LogError("No se encontró ninguna cámara en la escena!");
-                enabled = false; // Desactivar el script si no hay cámara
+                enabled = false;
                 return;
             }
+            mainCamera = cams[0];
         }
 
-        // Crear el GameObject para el cursor
         GameObject cursorObject = new GameObject("CursorSprite");
         cursorRenderer = cursorObject.AddComponent<SpriteRenderer>();
         cursorRenderer.sprite = cursorSprite;
         cursorRenderer.sortingOrder = 999;
 
-        // Ocultar el cursor del sistema
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Start()
     {
-        if (mainCamera == null)
-        {
-            Debug.LogError("mainCamera es null en Start!");
-            enabled = false;
-            return;
-        }
-
         screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-        UpdateCursorPosition();
     }
 
     void Update()
     {
-        // Verificar si la cámara sigue siendo válida
-        if (mainCamera == null)
-        {
-            Debug.LogWarning("Cámara perdida, buscando de nuevo...");
-            mainCamera = Camera.main;
-            if (mainCamera == null) return;
-        }
-
         UpdateCursorPosition();
         CheckForGrabbableObjects();
         HandleGrabbedObject();
@@ -93,193 +63,105 @@ public class CursorDragDrop : MonoBehaviour
 
     void UpdateCursorPosition()
     {
-        if (mainCamera == null || cursorRenderer == null) return;
+        Vector3 screenPos = new Vector3(
+            screenCenter.x + cursorOffset.x,
+            screenCenter.y + cursorOffset.y,
+            mainCamera.nearClipPlane + 0.1f
+        );
 
-        try
-        {
-            // Posicionar el cursor en el centro de la pantalla con offset
-            Vector3 screenPos = new Vector3(
-                screenCenter.x + cursorOffset.x,
-                screenCenter.y + cursorOffset.y,
-                mainCamera.nearClipPlane + 0.1f
-            );
-
-            Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPos);
-            cursorRenderer.transform.position = worldPos;
-
-            // Mantener el sprite mirando hacia la cámara
-            cursorRenderer.transform.LookAt(mainCamera.transform);
-            cursorRenderer.transform.Rotate(0, 180, 0);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Error en UpdateCursorPosition: " + e.Message);
-        }
+        cursorRenderer.transform.position = mainCamera.ScreenToWorldPoint(screenPos);
+        cursorRenderer.transform.LookAt(mainCamera.transform);
+        cursorRenderer.transform.Rotate(0, 180, 0);
     }
 
     void CheckForGrabbableObjects()
     {
-        if (isGrabbing || mainCamera == null) return;
+        if (isGrabbing)
+        {
+            canGrab = false;
+            return;
+        }
 
         Ray ray = mainCamera.ScreenPointToRay(screenCenter);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, grabDistance, grabMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, grabDistance, grabMask))
         {
-            hoveredObject = hit.collider;
-            canGrab = hit.collider.GetComponent<Rigidbody>() != null;
+            Rigidbody rb = hit.collider.GetComponentInParent<Rigidbody>();
+            canGrab = rb != null;
         }
         else
         {
-            hoveredObject = null;
             canGrab = false;
         }
     }
 
     void HandleGrabbedObject()
     {
-        if (!isGrabbing || grabbedObject == null || mainCamera == null) return;
+        if (!isGrabbing || grabbedRigidbody == null) return;
 
-        // Calcular la posición objetivo
-        Vector3 targetPosition = mainCamera.transform.position +
-                                mainCamera.transform.forward * holdDistance;
+        Vector3 basePos = mainCamera.transform.position + mainCamera.transform.forward * holdDistance;
+        Vector3 offset = mainCamera.transform.up * verticalHoldOffset;
+        Vector3 target = basePos + offset;
 
-        // Suavizar el movimiento
         currentHoldPosition = Vector3.Lerp(
             currentHoldPosition,
-            targetPosition,
+            target,
             smoothFollowSpeed * Time.deltaTime
         );
 
-        // Mover el objeto agarrado
-        if (grabbedRigidbody != null)
-        {
-            grabbedRigidbody.MovePosition(currentHoldPosition);
-
-            if (holdRotationOffset != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.Euler(holdRotationOffset);
-                grabbedRigidbody.MoveRotation(targetRotation);
-            }
-
-            grabbedRigidbody.linearVelocity = Vector3.zero;
-            grabbedRigidbody.angularVelocity = Vector3.zero;
-        }
-        else
-        {
-            grabbedObject.transform.position = currentHoldPosition;
-        }
+        grabbedRigidbody.transform.position = currentHoldPosition;
     }
 
     void UpdateCursorAppearance()
     {
-        if (cursorRenderer == null) return;
-
         if (isGrabbing)
-        {
             cursorRenderer.color = grabColor;
-        }
         else if (canGrab)
-        {
             cursorRenderer.color = hoverColor;
-        }
         else
-        {
             cursorRenderer.color = normalColor;
-        }
     }
 
     public void OnGrab(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            if (!isGrabbing)
-            {
-                TryGrabObject();
-            }
-            else
-            {
-                ReleaseObject();
-            }
-        }
+        if (!context.performed) return;
+
+        if (!isGrabbing)
+            TryGrabObject();
+        else
+            ReleaseObject();
     }
+
 
     void TryGrabObject()
     {
-        if (!canGrab || hoveredObject == null || mainCamera == null) return;
+        Ray ray = mainCamera.ScreenPointToRay(screenCenter);
 
-        grabbedObject = hoveredObject.gameObject;
-        grabbedRigidbody = grabbedObject.GetComponent<Rigidbody>();
+        if (!Physics.Raycast(ray, out RaycastHit hit, grabDistance, grabMask)) return;
 
-        if (grabbedRigidbody != null)
-        {
-            grabbedRigidbody.useGravity = false;
-            grabbedRigidbody.linearDamping = 10f;
-            grabbedRigidbody.angularDamping = 10f;
+        grabbedRigidbody = hit.collider.GetComponentInParent<Rigidbody>();
+        if (grabbedRigidbody == null) return;
 
-            currentHoldPosition = grabbedObject.transform.position;
-        }
-
+        grabbedRigidbody.isKinematic = true;
+        currentHoldPosition = grabbedRigidbody.transform.position;
         isGrabbing = true;
-        Debug.Log("Objeto agarrado: " + grabbedObject.name);
     }
 
     void ReleaseObject()
     {
-        if (grabbedObject == null) return;
+        if (grabbedRigidbody == null) return;
 
-        if (grabbedRigidbody != null)
-        {
-            grabbedRigidbody.useGravity = true;
-            grabbedRigidbody.linearDamping = 0f;
-            grabbedRigidbody.angularDamping = 0.05f;
+        grabbedRigidbody.isKinematic = false;
+        grabbedRigidbody.AddForce(mainCamera.transform.forward * throwForce, ForceMode.Impulse);
 
-            if (mainCamera != null)
-            {
-                Vector3 throwDirection = mainCamera.transform.forward;
-                grabbedRigidbody.AddForce(throwDirection * throwForce, ForceMode.Impulse);
-            }
-
-            Debug.Log("Objeto lanzado con fuerza: " + throwForce);
-        }
-
-        grabbedObject = null;
         grabbedRigidbody = null;
         isGrabbing = false;
-        hoveredObject = null;
-    }
-
-    void OnDrawGizmos()
-    {
-        if (mainCamera == null) return;
-
-        Gizmos.color = canGrab ? Color.green : Color.red;
-        Vector3 rayStart = mainCamera.transform.position;
-        Vector3 rayEnd = rayStart + mainCamera.transform.forward * grabDistance;
-        Gizmos.DrawLine(rayStart, rayEnd);
-
-        if (isGrabbing && grabbedObject != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(currentHoldPosition, 0.2f);
-        }
-    }
-
-    public void SetCursorSprite(Sprite newSprite)
-    {
-        cursorSprite = newSprite;
-        if (cursorRenderer != null)
-        {
-            cursorRenderer.sprite = newSprite;
-        }
     }
 
     void OnDestroy()
     {
-        if (cursorRenderer != null && cursorRenderer.gameObject != null)
-        {
+        if (cursorRenderer != null)
             Destroy(cursorRenderer.gameObject);
-        }
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
