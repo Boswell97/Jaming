@@ -118,6 +118,15 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""886f4f5a-aff5-458b-8af3-d28545286fe3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -307,6 +316,28 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""action"": ""Grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6bfa33e-3577-4340-b74e-49c964f65bee"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b35671e1-e690-4af4-9652-0b8335d74e5f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -318,6 +349,7 @@ public partial class @Player: IInputActionCollection2, IDisposable
         m_Newactionmap_Move = m_Newactionmap.FindAction("Move", throwIfNotFound: true);
         m_Newactionmap_Look = m_Newactionmap.FindAction("Look", throwIfNotFound: true);
         m_Newactionmap_Grab = m_Newactionmap.FindAction("Grab", throwIfNotFound: true);
+        m_Newactionmap_Close = m_Newactionmap.FindAction("Close", throwIfNotFound: true);
     }
 
     ~@Player()
@@ -401,6 +433,7 @@ public partial class @Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_Newactionmap_Move;
     private readonly InputAction m_Newactionmap_Look;
     private readonly InputAction m_Newactionmap_Grab;
+    private readonly InputAction m_Newactionmap_Close;
     /// <summary>
     /// Provides access to input actions defined in input action map "New action map".
     /// </summary>
@@ -424,6 +457,10 @@ public partial class @Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Newactionmap/Grab".
         /// </summary>
         public InputAction @Grab => m_Wrapper.m_Newactionmap_Grab;
+        /// <summary>
+        /// Provides access to the underlying input action "Newactionmap/Close".
+        /// </summary>
+        public InputAction @Close => m_Wrapper.m_Newactionmap_Close;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -459,6 +496,9 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @Grab.started += instance.OnGrab;
             @Grab.performed += instance.OnGrab;
             @Grab.canceled += instance.OnGrab;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
         }
 
         /// <summary>
@@ -479,6 +519,9 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @Grab.started -= instance.OnGrab;
             @Grab.performed -= instance.OnGrab;
             @Grab.canceled -= instance.OnGrab;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
         }
 
         /// <summary>
@@ -540,5 +583,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGrab(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Close" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClose(InputAction.CallbackContext context);
     }
 }
