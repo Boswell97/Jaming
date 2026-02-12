@@ -163,6 +163,15 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7e835390-5d48-4786-b75e-9d1d461ae4f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -528,6 +537,39 @@ public partial class @Player: IInputActionCollection2, IDisposable
                     ""action"": ""Valid"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13809ac6-f7e2-485b-a69d-f08f0ff0856f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d4c73a5-358c-43b8-b9e9-551c06f47c73"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27e458f5-83a0-4f70-ab6a-c28a48ec680b"",
+                    ""path"": ""<Mouse>/clickCount"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -566,6 +608,7 @@ public partial class @Player: IInputActionCollection2, IDisposable
         m_Newactionmap_Increment = m_Newactionmap.FindAction("Increment", throwIfNotFound: true);
         m_Newactionmap_Decrement = m_Newactionmap.FindAction("Decrement", throwIfNotFound: true);
         m_Newactionmap_Valid = m_Newactionmap.FindAction("Valid", throwIfNotFound: true);
+        m_Newactionmap_Interact = m_Newactionmap.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@Player()
@@ -654,6 +697,7 @@ public partial class @Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_Newactionmap_Increment;
     private readonly InputAction m_Newactionmap_Decrement;
     private readonly InputAction m_Newactionmap_Valid;
+    private readonly InputAction m_Newactionmap_Interact;
     /// <summary>
     /// Provides access to input actions defined in input action map "New action map".
     /// </summary>
@@ -697,6 +741,10 @@ public partial class @Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Newactionmap/Valid".
         /// </summary>
         public InputAction @Valid => m_Wrapper.m_Newactionmap_Valid;
+        /// <summary>
+        /// Provides access to the underlying input action "Newactionmap/Interact".
+        /// </summary>
+        public InputAction @Interact => m_Wrapper.m_Newactionmap_Interact;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -747,6 +795,9 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @Valid.started += instance.OnValid;
             @Valid.performed += instance.OnValid;
             @Valid.canceled += instance.OnValid;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         /// <summary>
@@ -782,6 +833,9 @@ public partial class @Player: IInputActionCollection2, IDisposable
             @Valid.started -= instance.OnValid;
             @Valid.performed -= instance.OnValid;
             @Valid.canceled -= instance.OnValid;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         /// <summary>
@@ -891,5 +945,12 @@ public partial class @Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnValid(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
