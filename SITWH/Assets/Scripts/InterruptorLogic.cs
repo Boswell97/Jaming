@@ -9,7 +9,7 @@ public class InterruptorZonas : MonoBehaviour
     public Zona zona2;
     public Zona zona3;
     public Zona zona4;
-
+    public Zona zona5;
     [Header("Activación")]
     public bool activarConClick = true;
     public bool activarConProximidad = true;
@@ -70,7 +70,6 @@ public class InterruptorZonas : MonoBehaviour
         zonaAnterior = zonaActual;
         zonaActual = zonaActual % 4 + 1;
 
-        Debug.Log($"🔁 Cambio de zona: {zonaAnterior} → {zonaActual}");
 
         if (zonaAnterior >= 1 && zonaAnterior <= 4)
         {
@@ -88,7 +87,7 @@ public class InterruptorZonas : MonoBehaviour
 
         alCambiarZona.Invoke();
 
-        Invoke(nameof(Reactivar), 0.1f); // Pequeña pausa para evitar doble input
+        Invoke(nameof(Reactivar), 0.1f); 
     }
 
     void Reactivar()
@@ -104,6 +103,7 @@ public class InterruptorZonas : MonoBehaviour
             case 2: return zona2;
             case 3: return zona3;
             case 4: return zona4;
+            case 5: return zona5;
             default: return null;
         }
     }
