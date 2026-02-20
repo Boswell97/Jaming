@@ -32,7 +32,6 @@ public class CalavereFlotando : MonoBehaviour
             Debug.LogWarning("No se encontró un objeto con la etiqueta 'Player'.");
         }
 
-        // Guardamos la posición Y inicial para la flotación
         yInicial = transform.position.y;
     }
 
@@ -40,7 +39,6 @@ public class CalavereFlotando : MonoBehaviour
     {
         if (jugador == null) return;
 
-        // 1. Movimiento horizontal hacia el jugador (sin modificar la Y)
         Vector3 posicionActual = transform.position;
         Vector3 direccionHorizontal = jugador.position - posicionActual;
         direccionHorizontal.y = 0; // Ignoramos la diferencia en Y para mantener la altura base
@@ -66,10 +64,6 @@ public class CalavereFlotando : MonoBehaviour
     {
         Debug.Log("tocado");
 
-        // Opcional: si solo quieres que detecte al jugador
-        // if (other.CompareTag("Player"))
-        // {
-        //     Debug.Log("tocado");
-        // }
+    
     }
 }
