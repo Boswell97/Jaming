@@ -41,6 +41,7 @@ public class SingleTrigger : MonoBehaviour
             isActive = true;
             Debug.Log($"✅ {gameObject.name}: TAG CORRECTO '{requiredTag}'!");
             Destroy(other.gameObject);
+            
             myCollider1.SetActive(false);
             myCollider2.SetActive(true);
 
