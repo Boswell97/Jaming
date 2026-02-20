@@ -3,7 +3,7 @@ using UnityEngine;
 public class LayerObserver : MonoBehaviour
 {
     [Tooltip("Nombre de la capa de los objetos que serán destruidos al ser tocados por este objeto.")]
-    public string capaDestructor = "Destructors";
+    public string capaDestructor = "Destructor";
 
     // Se llama al iniciar una colisión (necesita Collider + Rigidbody)
     void OnCollisionEnter(Collision collision)
