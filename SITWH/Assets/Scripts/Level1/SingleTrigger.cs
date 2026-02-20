@@ -8,7 +8,7 @@ public class SingleTrigger : MonoBehaviour
     [SerializeField] private bool isActive = false;
     private int layerValue;
     private Collider myCollider;
-
+    [SerializeField] public GameObject myCollider1;
     void Start()
     {
         layerValue = LayerMask.NameToLayer(targetLayer);
@@ -23,7 +23,6 @@ public class SingleTrigger : MonoBehaviour
         myCollider.isTrigger = true;
         isActive = false; // Asegurar que empiece en false
 
-        Debug.Log($"✅ Trigger '{gameObject.name}' listo (Tag requerido: '{requiredTag}', Layer: {targetLayer})");
     }
 
     void OnTriggerEnter(Collider other)
@@ -41,6 +40,8 @@ public class SingleTrigger : MonoBehaviour
             isActive = true;
             Debug.Log($"✅ {gameObject.name}: TAG CORRECTO '{requiredTag}'!");
             Destroy(other.gameObject);
+            myCollider1.SetActive(false);
+
         }
         else
         {
@@ -57,7 +58,6 @@ public class SingleTrigger : MonoBehaviour
     public void ResetTrigger()
     {
         isActive = false;
-        Debug.Log($"🔄 {gameObject.name} resetead");
     }
 
     void OnDrawGizmos()

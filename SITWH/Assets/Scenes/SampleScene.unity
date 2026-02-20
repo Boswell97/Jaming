@@ -17738,6 +17738,7 @@ MonoBehaviour:
   requiredTag: Place
   targetLayer: Grabbable
   isActive: 1
+  myCollider1: {fileID: 1234739572}
 --- !u!65 &421034674
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42552,7 +42553,7 @@ Transform:
   m_GameObject: {fileID: 1154703286}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.747, y: -5.4, z: -28.04}
+  m_LocalPosition: {x: 2.747, y: -5.4, z: -27.906}
   m_LocalScale: {x: 1.4832778, y: 2.766019, z: 0.82322}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42573,6 +42574,7 @@ MonoBehaviour:
   requiredTag: Color
   targetLayer: Grabbable
   isActive: 1
+  myCollider1: {fileID: 2004365030}
 --- !u!1 &1160707822
 GameObject:
   m_ObjectHideFlags: 0
