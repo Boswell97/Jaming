@@ -7,10 +7,10 @@ public class TriggerManager : MonoBehaviour
 
 
 
+
     void Start()
     {
         FindAllTriggers();
-        Debug.Log($"✅ Manager activo con {childTriggers.Length} triggers hijos");
     }
 
     void FindAllTriggers()
@@ -19,7 +19,6 @@ public class TriggerManager : MonoBehaviour
 
         if (childTriggers.Length == 0)
         {
-            Debug.LogWarning("⚠️ No se encontraron SingleTrigger en los hijos");
         }
     }
 
@@ -56,7 +55,6 @@ public class TriggerManager : MonoBehaviour
             }
         }
         allActive = false;
-        Debug.Log("🔄 Todos los triggers reseteados");
     }
 
     void Update()
@@ -64,15 +62,12 @@ public class TriggerManager : MonoBehaviour
         // Solo para debugging - verificar estado cada frame
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Debug.Log($"=== ESTADO TRIGGERS ===");
             for (int i = 0; i < childTriggers.Length; i++)
             {
                 if (childTriggers[i] != null)
                 {
-                    Debug.Log($"Trigger {i}: {childTriggers[i].gameObject.name} - Activo: {childTriggers[i].IsActive()}");
                 }
             }
-            Debug.Log($"Todos activos: {AreAllTriggersActive()}");
         }
     }
 }
