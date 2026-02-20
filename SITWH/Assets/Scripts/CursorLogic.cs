@@ -6,6 +6,7 @@ public class CenterScreenGrab : MonoBehaviour
     [Header("Configuración")]
     [SerializeField] private LayerMask grabbableLayer;
     [SerializeField] private float grabDistance = 5f;
+    [SerializeField] private float holdDistance = 1.2f;
     [SerializeField] private Color hoverColor = Color.yellow;
     [SerializeField] private Color grabbedColor = Color.green;
     [SerializeField] private Camera playerCamera;
@@ -174,12 +175,12 @@ public class CenterScreenGrab : MonoBehaviour
         if (grabbedObject == null || playerCamera == null) return;
 
         Vector3 targetPosition = playerCamera.transform.position +
-                                playerCamera.transform.forward * (grabDistance * 0.7f);
+                                 playerCamera.transform.forward * holdDistance;
 
         grabbedObject.transform.position = Vector3.Lerp(
             grabbedObject.transform.position,
             targetPosition,
-            Time.deltaTime * 10f
+            Time.deltaTime * 15f
         );
     }
 
