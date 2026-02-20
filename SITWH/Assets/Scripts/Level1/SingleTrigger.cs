@@ -9,6 +9,7 @@ public class SingleTrigger : MonoBehaviour
     private int layerValue;
     private Collider myCollider;
     [SerializeField] public GameObject myCollider1;
+    [SerializeField] public GameObject myCollider2;
     void Start()
     {
         layerValue = LayerMask.NameToLayer(targetLayer);
@@ -41,6 +42,7 @@ public class SingleTrigger : MonoBehaviour
             Debug.Log($"✅ {gameObject.name}: TAG CORRECTO '{requiredTag}'!");
             Destroy(other.gameObject);
             myCollider1.SetActive(false);
+            myCollider2.SetActive(true);
 
         }
         else
