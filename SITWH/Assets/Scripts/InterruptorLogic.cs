@@ -67,11 +67,12 @@ public class InterruptorZonas : MonoBehaviour
         if (!puedeActivar) return;
         puedeActivar = false;
 
+        const int totalZonas = 5;
+
         zonaAnterior = zonaActual;
-        zonaActual = zonaActual % 4 + 1;
+        zonaActual = zonaActual % totalZonas + 1;
 
-
-        if (zonaAnterior >= 1 && zonaAnterior <= 4)
+        if (zonaAnterior >= 1 && zonaAnterior <= 5)
         {
             Zona ant = ObtenerZona(zonaAnterior);
             AplicarEstado(ant.activar, false);
