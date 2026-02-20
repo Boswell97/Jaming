@@ -730,7 +730,6 @@ MonoBehaviour:
   zona1:
     activar:
     - {fileID: 1891694369}
-    - {fileID: 9082264575859779845}
     - {fileID: 919132148140107858}
     desactivar:
     - {fileID: 1884645264}
@@ -742,8 +741,6 @@ MonoBehaviour:
     - {fileID: 919132148389202303}
     desactivar:
     - {fileID: 9062971703716218528}
-    - {fileID: 1820093883}
-    - {fileID: 9082264575859779845}
     - {fileID: 919132148140107858}
   zona3:
     activar:
@@ -764,9 +761,16 @@ MonoBehaviour:
     - {fileID: 919132149326205762}
   zona5:
     activar:
-    - {fileID: 1820093883}
+    - {fileID: 1533199063}
+    - {fileID: 768953027}
+    - {fileID: 1719311610}
+    - {fileID: 1847349496}
+    - {fileID: 1621285986}
+    - {fileID: 2014735960}
+    - {fileID: 1533199063}
     desactivar:
     - {fileID: 562730761}
+    - {fileID: 919132149219229570}
   activarConClick: 1
   activarConProximidad: 1
   rangoInteraccion: 3
@@ -18369,7 +18373,6 @@ Transform:
   m_LocalScale: {x: 15.320597, y: 15.320597, z: 15.320599}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8449174218222613439}
   - {fileID: 481738641872129246}
   - {fileID: 543450652600709864}
   - {fileID: 543450652816222281}
@@ -75267,7 +75270,7 @@ GameObject:
   - component: {fileID: 171437589}
   - component: {fileID: 171437595}
   m_Layer: 7
-  m_Name: calavere (4)
+  m_Name: calavereverde
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79955,14 +79958,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9104479497148415940}
   m_Mesh: {fileID: -5190843729760283454, guid: 2d1e9d3b05d6c4b4a9a9d94f6029377f, type: 3}
---- !u!33 &4822973373296622618
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9082264575859779845}
-  m_Mesh: {fileID: 4493585093827132993, guid: c8e075041af273247813da2c20bc06df, type: 3}
 --- !u!4 &4846827042992350915
 Transform:
   m_ObjectHideFlags: 0
@@ -80648,54 +80643,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &7280724051789859024
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9082264575859779845}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 6530259116649099760, guid: c8e075041af273247813da2c20bc06df, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7290046812110753457
 GameObject:
   m_ObjectHideFlags: 0
@@ -81466,21 +81413,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1712536016}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 180}
---- !u!4 &8449174218222613439
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9082264575859779845}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 562730762}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 296.182}
 --- !u!4 &8483082900529619672
 Transform:
   m_ObjectHideFlags: 0
@@ -81706,27 +81638,6 @@ CapsuleCollider:
   m_Height: 0.8325169
   m_Direction: 1
   m_Center: {x: 0, y: 0.41625845, z: 0}
---- !u!65 &8938663863879148556
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9082264575859779845}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.024153007, y: 0.027092606, z: 0.027379863}
-  m_Center: {x: -1.1159369e-10, y: 0.0037444634, z: -0.0036907406}
 --- !u!1001 &8948851428039543802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81860,25 +81771,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.12269773, y: 5.049553, z: 5.8689013}
   m_Center: {x: -0.00000023841858, y: 2.2112308, z: 1.1653442}
---- !u!1 &9082264575859779845
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8449174218222613439}
-  - component: {fileID: 4822973373296622618}
-  - component: {fileID: 7280724051789859024}
-  - component: {fileID: 8938663863879148556}
-  m_Layer: 7
-  m_Name: calavere
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!1 &9104479497148415940
 GameObject:
   m_ObjectHideFlags: 0
