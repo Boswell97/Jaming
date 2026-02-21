@@ -2,26 +2,35 @@ using UnityEngine;
 
 public class LayerObserver : MonoBehaviour
 {
-    [Tooltip("Nombre de la capa de los objetos que serán destruidos al ser tocados por este objeto.")]
     public string capaDestructor = "Destructor";
+    public GameObject particulasPrefab;
+    public float offsetSalida = 0.02f;
 
-    // Se llama al iniciar una colisión (necesita Collider + Rigidbody)
     void OnCollisionEnter(Collision collision)
     {
-        // Verificar si el objeto con el que colisionamos pertenece a la capa "Destructors"
         if (collision.gameObject.layer == LayerMask.NameToLayer(capaDestructor))
         {
-            // Destruir el objeto destructor
+            ContactPoint contacto = collision.GetContact(0);
+            Vector3 punto = contacto.point + contacto.normal * offsetSalida;
+
+            ActivarParticulas(punto, Quaternion.LookRotation(contacto.normal));
             Destroy(collision.gameObject);
         }
     }
 
-    // Alternativa si usas Triggers (Collider con "Is Trigger" activado)
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer(capaDestructor))
         {
+            Vector3 punto = other.ClosestPoint(transform.position);
+            ActivarParticulas(punto, Quaternion.identity);
             Destroy(other.gameObject);
         }
+    }
+
+    void ActivarParticulas(Vector3 posicion, Quaternion rotacion)
+    {
+        if (particulasPrefab != null)
+            Instantiate(particulasPrefab, posicion, rotacion);
     }
 }
