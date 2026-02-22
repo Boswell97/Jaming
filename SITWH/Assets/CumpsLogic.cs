@@ -1,28 +1,23 @@
 using UnityEngine;
-using UnityEngine.AI;
+using System.Collections;
 
 public class CrumpsLogic : MonoBehaviour
 {
-    [Header("Referencias")]
     public Animator animator;
-    public NavMeshAgent agent;
     public Collider dodgeTrigger;
     public LayerMask grabbableLayer;
 
-    [Header("Salud")]
     public float health = 100f;
     public float healthChangeAmount = 10f;
 
-    [Header("Estados de animación (bools)")]
-    private bool claps;
-    private bool ups;
-    private bool dodges;
-    private bool no;
+    bool claps;
+    bool ups;
+    bool dodges;
+    bool no;
 
     void Start()
     {
         if (animator == null) animator = GetComponent<Animator>();
-        if (agent == null) agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -36,37 +31,51 @@ public class CrumpsLogic : MonoBehaviour
     public void OnGoodObjectDestroyed(Vector3 position)
     {
         health += healthChangeAmount;
-        claps = true;
-        ups = true;
-        no = false;
+        StopAllCoroutines();
+        StartCoroutine(GoodReaction());
     }
 
     public void OnBadObjectDestroyed(Vector3 position)
     {
         health -= healthChangeAmount;
+        StopAllCoroutines();
+        StartCoroutine(BadReaction());
+    }
+
+    IEnumerator GoodReaction()
+    {
+        ResetReactions();
+        claps = true;
+        ups = true;
+        yield return new WaitForSeconds(1f);
+        ResetReactions();
+    }
+
+    IEnumerator BadReaction()
+    {
+        ResetReactions();
         no = true;
+        yield return new WaitForSeconds(1f);
+        ResetReactions();
+    }
+
+    void ResetReactions()
+    {
         claps = false;
         ups = false;
-        if (agent != null)
-        {
-            agent.SetDestination(position);
-        }
+        no = false;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (IsInLayerMask(other.gameObject, grabbableLayer))
-        {
             dodges = true;
-        }
     }
 
     void OnTriggerExit(Collider other)
     {
         if (IsInLayerMask(other.gameObject, grabbableLayer))
-        {
             dodges = false;
-        }
     }
 
     bool IsInLayerMask(GameObject obj, LayerMask mask)

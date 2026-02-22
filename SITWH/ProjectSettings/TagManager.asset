@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Color
   - Place
+  - ObjectosCrumpsGood
+  - ObjectosCrumpsBad
+  - Crumps
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - Floor
   - Destructor
   - Crumps
-  - ObjectosCrumpsGood
-  - ObjectosCrumpsBad
+  - 
+  - 
   - 
   - 
   - 
