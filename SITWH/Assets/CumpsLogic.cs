@@ -15,6 +15,9 @@ public class CrumpsLogic : MonoBehaviour
     bool dodges;
     bool no;
 
+    Coroutine reactionRoutine;
+    Coroutine dodgeRoutine;
+
     void Start()
     {
         if (animator == null) animator = GetComponent<Animator>();
@@ -31,15 +34,21 @@ public class CrumpsLogic : MonoBehaviour
     public void OnGoodObjectDestroyed(Vector3 position)
     {
         health += healthChangeAmount;
-        StopAllCoroutines();
-        StartCoroutine(GoodReaction());
+
+        if (reactionRoutine != null)
+            StopCoroutine(reactionRoutine);
+
+        reactionRoutine = StartCoroutine(GoodReaction());
     }
 
     public void OnBadObjectDestroyed(Vector3 position)
     {
         health -= healthChangeAmount;
-        StopAllCoroutines();
-        StartCoroutine(BadReaction());
+
+        if (reactionRoutine != null)
+            StopCoroutine(reactionRoutine);
+
+        reactionRoutine = StartCoroutine(BadReaction());
     }
 
     IEnumerator GoodReaction()
@@ -59,6 +68,13 @@ public class CrumpsLogic : MonoBehaviour
         ResetReactions();
     }
 
+    IEnumerator DodgeReaction()
+    {
+        dodges = true;
+        yield return new WaitForSeconds(0.7f);
+        dodges = false;
+    }
+
     void ResetReactions()
     {
         claps = false;
@@ -69,13 +85,12 @@ public class CrumpsLogic : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (IsInLayerMask(other.gameObject, grabbableLayer))
-            dodges = true;
-    }
+        {
+            if (dodgeRoutine != null)
+                StopCoroutine(dodgeRoutine);
 
-    void OnTriggerExit(Collider other)
-    {
-        if (IsInLayerMask(other.gameObject, grabbableLayer))
-            dodges = false;
+            dodgeRoutine = StartCoroutine(DodgeReaction());
+        }
     }
 
     bool IsInLayerMask(GameObject obj, LayerMask mask)
