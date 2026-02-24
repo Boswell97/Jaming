@@ -464,7 +464,7 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 0
   sourceProjectPath: 
-  sourceBankPath: FMOD
+  sourceBankPath: C:/Users/Lenovo/Documents/GitHub/jaming/SITWH/FMOD
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
