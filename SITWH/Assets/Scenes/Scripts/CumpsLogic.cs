@@ -55,7 +55,6 @@ public class CrumpsLogic : MonoBehaviour
     {
         ResetReactions();
         claps = true;
-        ups = true;
         yield return new WaitForSeconds(1f);
         ResetReactions();
     }
@@ -70,6 +69,9 @@ public class CrumpsLogic : MonoBehaviour
 
     IEnumerator DodgeReaction()
     {
+        if (reactionRoutine != null) yield break;
+
+        ResetReactions();
         dodges = true;
         yield return new WaitForSeconds(0.7f);
         dodges = false;
@@ -80,12 +82,15 @@ public class CrumpsLogic : MonoBehaviour
         claps = false;
         ups = false;
         no = false;
+        dodges = false;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (IsInLayerMask(other.gameObject, grabbableLayer))
         {
+            if (reactionRoutine != null) return;
+
             if (dodgeRoutine != null)
                 StopCoroutine(dodgeRoutine);
 

@@ -14,16 +14,18 @@ public class Destruible : MonoBehaviour
     private Rigidbody rb;
     private Collider objectCollider;
 
+    CrumpsLogic crumps;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         objectCollider = GetComponent<Collider>();
 
+        GameObject c = GameObject.FindGameObjectWithTag("Crumps");
+        if (c != null) crumps = c.GetComponent<CrumpsLogic>();
+
         if (floorLayer.value == 0)
-        {
-            Debug.LogWarning($"No se ha asignado una capa para el suelo en {gameObject.name}. Se usará 'Floor' por defecto.");
             floorLayer = LayerMask.GetMask("Floor");
-        }
     }
 
     void Update()
@@ -36,6 +38,7 @@ public class Destruible : MonoBehaviour
 
                 if (floorContactTime >= floorCheckDelay)
                 {
+                    NotifyCrumps();
                     HandleDestruction();
                     isCheckingFloor = false;
                 }
@@ -45,6 +48,17 @@ public class Destruible : MonoBehaviour
                 floorContactTime = 0f;
             }
         }
+    }
+
+    void NotifyCrumps()
+    {
+        if (crumps == null) return;
+
+        if (CompareTag("ObjectosCrumpsGood"))
+            crumps.OnGoodObjectDestroyed(transform.position);
+
+        else if (CompareTag("ObjectosCrumpsBad"))
+            crumps.OnBadObjectDestroyed(transform.position);
     }
 
     public void OnGrabbed()
@@ -57,9 +71,7 @@ public class Destruible : MonoBehaviour
     public void OnReleased()
     {
         if (hasBeenGrabbed)
-        {
             StartCoroutine(StartFloorCheckAfterDelay(0.5f));
-        }
     }
 
     private IEnumerator StartFloorCheckAfterDelay(float delay)
@@ -74,42 +86,33 @@ public class Destruible : MonoBehaviour
         if (objectCollider == null) return false;
 
         float raycastDistance = objectCollider.bounds.extents.y + 0.2f;
-        Vector3[] rayOrigins = new Vector3[5];
 
-        rayOrigins[0] = transform.position;
-
-        Vector3 extents = objectCollider.bounds.extents * 0.8f;
-        rayOrigins[1] = transform.position + new Vector3(extents.x, 0, extents.z);
-        rayOrigins[2] = transform.position + new Vector3(-extents.x, 0, extents.z);
-        rayOrigins[3] = transform.position + new Vector3(extents.x, 0, -extents.z);
-        rayOrigins[4] = transform.position + new Vector3(-extents.x, 0, -extents.z);
-
-        int floorHits = 0;
-
-        for (int i = 0; i < rayOrigins.Length; i++)
+        Vector3[] rayOrigins =
         {
-            Ray ray = new Ray(rayOrigins[i], Vector3.down);
-            RaycastHit hit;
+            transform.position,
+            transform.position + new Vector3(objectCollider.bounds.extents.x * 0.8f,0, objectCollider.bounds.extents.z * 0.8f),
+            transform.position + new Vector3(-objectCollider.bounds.extents.x * 0.8f,0, objectCollider.bounds.extents.z * 0.8f),
+            transform.position + new Vector3(objectCollider.bounds.extents.x * 0.8f,0,-objectCollider.bounds.extents.z * 0.8f),
+            transform.position + new Vector3(-objectCollider.bounds.extents.x * 0.8f,0,-objectCollider.bounds.extents.z * 0.8f)
+        };
 
-            if (Physics.Raycast(ray, out hit, raycastDistance, floorLayer))
-            {
-                floorHits++;
-            }
+        int hits = 0;
+
+        foreach (var origin in rayOrigins)
+        {
+            if (Physics.Raycast(origin, Vector3.down, raycastDistance, floorLayer))
+                hits++;
         }
 
-        return floorHits >= 3;
+        return hits >= 3;
     }
 
     private void HandleDestruction()
     {
         if (destroyOnFloorTouch)
-        {
             Destroy(gameObject, timeToDestroy);
-        }
         else
-        {
             gameObject.SetActive(false);
-        }
 
         enabled = false;
     }
@@ -117,36 +120,11 @@ public class Destruible : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (hasBeenGrabbed && !isCheckingFloor && IsLayerInMask(collision.gameObject.layer, floorLayer))
-        {
             StartCoroutine(StartFloorCheckAfterDelay(0.5f));
-        }
     }
 
     private bool IsLayerInMask(int layer, LayerMask mask)
     {
         return mask == (mask | (1 << layer));
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (objectCollider != null && isCheckingFloor)
-        {
-            Gizmos.color = Color.cyan;
-            float raycastDistance = objectCollider.bounds.extents.y + 0.2f;
-
-            Vector3[] rayOrigins = new Vector3[5];
-            Vector3 extents = objectCollider.bounds.extents * 0.8f;
-
-            rayOrigins[0] = transform.position;
-            rayOrigins[1] = transform.position + new Vector3(extents.x, 0, extents.z);
-            rayOrigins[2] = transform.position + new Vector3(-extents.x, 0, extents.z);
-            rayOrigins[3] = transform.position + new Vector3(extents.x, 0, -extents.z);
-            rayOrigins[4] = transform.position + new Vector3(-extents.x, 0, -extents.z);
-
-            for (int i = 0; i < rayOrigins.Length; i++)
-            {
-                Gizmos.DrawRay(rayOrigins[i], Vector3.down * raycastDistance);
-            }
-        }
     }
 }
