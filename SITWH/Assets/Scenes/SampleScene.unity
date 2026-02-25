@@ -18774,8 +18774,8 @@ MonoBehaviour:
     m_Bits: 8
   grabDistance: 5
   holdDistance: 1.2
-  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  grabbedColor: {r: 0, g: 1, b: 0, a: 1}
+  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.39215687}
+  grabbedColor: {r: 0, g: 1, b: 0, a: 0.36862746}
   playerCamera: {fileID: 836683736}
   grabAction:
     m_UseReference: 1

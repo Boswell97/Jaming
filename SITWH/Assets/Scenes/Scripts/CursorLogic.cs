@@ -111,19 +111,30 @@ public class CenterScreenGrab : MonoBehaviour
         if (currentGrabbable != null && grabbedObject == null)
         {
             grabbedObject = currentGrabbable;
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+                rb.useGravity = false;
+                rb.detectCollisions = false;
+            }
 
+            Collider[] cols = grabbedObject.GetComponentsInChildren<Collider>();
+            
+
+
+            foreach (Collider col in cols)
+            {
+                col.enabled = false;
+            }
             Destruible destruible = grabbedObject.GetComponent<Destruible>();
             if (destruible != null)
             {
                 destruible.OnGrabbed();
             }
 
-            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = true;
-                rb.useGravity = false;
-            }
+
+          
 
             if (currentRenderer != null)
             {
@@ -143,12 +154,22 @@ public class CenterScreenGrab : MonoBehaviour
     private void ReleaseObject()
     {
         if (grabbedObject == null) return;
-
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
+            rb.detectCollisions = true;
             rb.isKinematic = false;
             rb.useGravity = true;
+        }
+
+        Collider[] cols = grabbedObject.GetComponentsInChildren<Collider>();
+        foreach (Collider col in cols)
+        {
+            col.enabled = true;
+        }
+
+        if (rb != null)
+        {
             rb.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
         }
 
