@@ -18789,7 +18789,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -3045212205327133378, guid: 555ca47d718a7744eb3a8a7466164e07, type: 3}
   centerSprite: {fileID: 1494064959}
-  throwForce: 250
+  throwForce: 24
   crosshairUI: {fileID: 1494064958}
 --- !u!4 &352304448
 Transform:
@@ -56399,7 +56399,7 @@ Transform:
   m_GameObject: {fileID: 1057247548}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.96, z: -29.14}
+  m_LocalPosition: {x: 0, y: -0.95, z: -29.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101601,7 +101601,7 @@ GameObject:
   - component: {fileID: 3469287838482731719}
   m_Layer: 3
   m_Name: "MesaPeque\xF1a"
-  m_TagString: ObjectosCrumpsGood
+  m_TagString: ObjectosCrumpsBad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102274,7 +102274,7 @@ GameObject:
   - component: {fileID: 3469287837532090963}
   m_Layer: 3
   m_Name: SillonPresidencial
-  m_TagString: ObjectosCrumpsGood
+  m_TagString: ObjectosCrumpsBad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117800,12 +117800,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.8539, y: 8.719389, z: 0.1534322}
-  m_Center: {x: 0.0000000055879354, y: -0.00000025201086, z: 0.06785028}
+  m_Size: {x: 11.701212, y: 15.181978, z: 0.15343219}
+  m_Center: {x: 0.31010526, y: 3.2312942, z: 0.06785028}
 --- !u!33 &3469287836975933790
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -121578,7 +121578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   animator: {fileID: 5866666019861991556}
-  dodgeTrigger: {fileID: 5866666019861991557}
   grabbableLayer:
     serializedVersion: 2
     m_Bits: 8
