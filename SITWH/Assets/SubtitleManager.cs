@@ -5,6 +5,7 @@ using System.Collections;
 public class SubtitleManager : MonoBehaviour
 {
     public static SubtitleManager Instance;
+    public GameObject panel;
     public TextMeshProUGUI subtitleText;
     Coroutine routine;
 
@@ -15,6 +16,8 @@ public class SubtitleManager : MonoBehaviour
 
     public void Show(string text, float duration)
     {
+        panel.gameObject.SetActive(true);
+
         if (routine != null) StopCoroutine(routine);
         routine = StartCoroutine(ShowRoutine(text, duration));
     }
@@ -25,5 +28,6 @@ public class SubtitleManager : MonoBehaviour
         subtitleText.gameObject.SetActive(true);
         yield return new WaitForSeconds(duration);
         subtitleText.gameObject.SetActive(false);
+        panel.gameObject.SetActive(false);
     }
 }
