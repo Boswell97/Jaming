@@ -18790,7 +18790,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -3045212205327133378, guid: 555ca47d718a7744eb3a8a7466164e07, type: 3}
   centerSprite: {fileID: 1494064959}
-  throwForce: 24
+  throwForce: 50
   crosshairUI: {fileID: 1494064958}
 --- !u!4 &352304448
 Transform:
@@ -93921,7 +93921,7 @@ MonoBehaviour:
   jugador: {fileID: 1412512083}
   objeto1: {fileID: 352304446}
   objeto2: {fileID: 1494064958}
-  duracionFade: 10
+  duracionFade: 8
 --- !u!4 &2081383049
 Transform:
   m_ObjectHideFlags: 0
