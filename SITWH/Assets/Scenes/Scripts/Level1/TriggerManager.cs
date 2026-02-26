@@ -59,15 +59,6 @@ public class TriggerManager : MonoBehaviour
 
     void Update()
     {
-        // Solo para debugging - verificar estado cada frame
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            for (int i = 0; i < childTriggers.Length; i++)
-            {
-                if (childTriggers[i] != null)
-                {
-                }
-            }
-        }
+      
     }
 }
