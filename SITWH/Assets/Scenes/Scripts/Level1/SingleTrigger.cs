@@ -15,12 +15,6 @@ public class SingleTrigger : MonoBehaviour
         layerValue = LayerMask.NameToLayer(targetLayer);
         myCollider = GetComponent<Collider>();
 
-        if (myCollider == null)
-        {
-            Debug.LogError($"❌ {gameObject.name} no tiene Collider");
-            return;
-        }
-
         myCollider.isTrigger = true;
         isActive = false; // Asegurar que empiece en false
 
@@ -49,7 +43,14 @@ public class SingleTrigger : MonoBehaviour
         else
         {
             Debug.Log($"❌ {gameObject.name}: Tag incorrecto. Esperaba '{requiredTag}', tiene '{other.tag}'");
-            Destroy(other.gameObject);
+
+            Rigidbody rb = other.attachedRigidbody;
+
+            if (rb != null)
+            {
+                float multiplicador = 6f;
+                rb.linearVelocity *= multiplicador;
+            }
         }
     }
 

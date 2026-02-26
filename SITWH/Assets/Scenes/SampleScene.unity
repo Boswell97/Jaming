@@ -7193,7 +7193,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149399727953}
   serializedVersion: 5
-  m_Mass: 16.7
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -7261,7 +7261,7 @@ Transform:
   m_GameObject: {fileID: 230188990}
   serializedVersion: 2
   m_LocalRotation: {x: -0.10424868, y: 0.73504525, z: 0.6633178, w: -0.094075926}
-  m_LocalPosition: {x: 0.667, y: 0.262, z: 15.734}
+  m_LocalPosition: {x: 0.654, y: 0.258, z: 15.734}
   m_LocalScale: {x: 1.1901457, y: 1.190146, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7537,7 +7537,7 @@ GameObject:
   - component: {fileID: 252836922}
   m_Layer: 3
   m_Name: CuboJuguete (5)
-  m_TagString: Place
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7601,7 +7601,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252836920}
   serializedVersion: 5
-  m_Mass: 16.7
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8458,7 +8458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &289690788
 Transform:
   m_ObjectHideFlags: 0
@@ -28521,7 +28521,7 @@ GameObject:
   - component: {fileID: 698961748}
   - component: {fileID: 698961747}
   m_Layer: 0
-  m_Name: Luces (6)
+  m_Name: ' '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28599,7 +28599,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.95023006, b: 0.80566037, a: 1}
   m_Intensity: 1
-  m_Range: 5.96
+  m_Range: 2
   m_SpotAngle: 88.7487
   m_InnerSpotAngle: 64.71474
   m_CookieSize: 10
@@ -33770,7 +33770,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718297233}
   serializedVersion: 5
-  m_Mass: 16.7
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -34250,7 +34250,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.22
-  m_Range: 2.98
+  m_Range: 1.82
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -34288,7 +34288,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -57363,7 +57363,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.22
-  m_Range: 2.98
+  m_Range: 2.73
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -58778,7 +58778,7 @@ GameObject:
   - component: {fileID: 1163230564}
   m_Layer: 3
   m_Name: CuboJuguete (9)
-  m_TagString: Place
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58842,7 +58842,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163230562}
   serializedVersion: 5
-  m_Mass: 16.7
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -59163,7 +59163,7 @@ Transform:
   m_GameObject: {fileID: 1178384745}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.8792155, z: -0.4764243, w: 0}
-  m_LocalPosition: {x: -1.97, y: 4.09, z: 8.3}
+  m_LocalPosition: {x: -1.97, y: 3.43, z: 7.87}
   m_LocalScale: {x: 1.1901457, y: 1.190146, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -59226,7 +59226,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.95023006, b: 0.80566037, a: 1}
   m_Intensity: 1
-  m_Range: 5.96
+  m_Range: 3
   m_SpotAngle: 88.7487
   m_InnerSpotAngle: 64.71474
   m_CookieSize: 10
@@ -59823,7 +59823,7 @@ GameObject:
   - component: {fileID: 1214559095}
   m_Layer: 3
   m_Name: CuboJuguete (10)
-  m_TagString: Place
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59887,7 +59887,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214559093}
   serializedVersion: 5
-  m_Mass: 16.7
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -60960,7 +60960,7 @@ Transform:
   m_GameObject: {fileID: 1255373886}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.8792155, z: -0.4764243, w: 0}
-  m_LocalPosition: {x: 1.4200001, y: 4.09, z: 8.299999}
+  m_LocalPosition: {x: 1.4200001, y: 3.4299998, z: 7.869999}
   m_LocalScale: {x: 1.1901457, y: 1.190146, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61023,7 +61023,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.95023006, b: 0.80566037, a: 1}
   m_Intensity: 1
-  m_Range: 5.96
+  m_Range: 3
   m_SpotAngle: 88.7487
   m_InnerSpotAngle: 64.71474
   m_CookieSize: 10
@@ -62030,7 +62030,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.85
-  m_Range: 5.83
+  m_Range: 1.72
   m_SpotAngle: 117.3492
   m_InnerSpotAngle: 58.129917
   m_CookieSize: 10
@@ -62110,7 +62110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e0c0d19dfdcc84486c5d69f7df1328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  intensidadMin: 0.85
+  intensidadMin: 0.37
   intensidadMax: 0.94
   intervaloMin: 0.2
   intervaloMax: 0.66
@@ -74536,7 +74536,7 @@ Transform:
   m_GameObject: {fileID: 1533199063}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.122, y: -4.475, z: -33.222}
+  m_LocalPosition: {x: 9.162, y: -4.446, z: -33.222}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74583,7 +74583,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.97
-  m_Range: 2.98
+  m_Range: 2.95
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -75623,7 +75623,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.22
-  m_Range: 2.98
+  m_Range: 0.22
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -75661,7 +75661,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -76091,7 +76091,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.95023006, b: 0.80566037, a: 1}
   m_Intensity: 1
-  m_Range: 5.96
+  m_Range: 2
   m_SpotAngle: 88.7487
   m_InnerSpotAngle: 64.71474
   m_CookieSize: 10
@@ -76132,7 +76132,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 3.55
+  m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -76284,7 +76284,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.22
-  m_Range: 2.98
+  m_Range: 2
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -89580,7 +89580,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.95023006, b: 0.80566037, a: 1}
   m_Intensity: 1
-  m_Range: 5.96
+  m_Range: 2
   m_SpotAngle: 88.7487
   m_InnerSpotAngle: 64.71474
   m_CookieSize: 10
@@ -96836,7 +96836,7 @@ GameObject:
   - component: {fileID: 2119313168}
   m_Layer: 3
   m_Name: CuboJuguete (6)
-  m_TagString: Place
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96900,7 +96900,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119313166}
   serializedVersion: 5
-  m_Mass: 16.7
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -104957,7 +104957,7 @@ GameObject:
   - component: {fileID: 3469287837304879695}
   m_Layer: 3
   m_Name: CuboJuguete (4)
-  m_TagString: Place
+  m_TagString: Color
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
