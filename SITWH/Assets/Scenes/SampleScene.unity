@@ -28239,7 +28239,7 @@ GameObject:
   - component: {fileID: 685130647}
   - component: {fileID: 685130646}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
