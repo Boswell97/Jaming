@@ -492,6 +492,9 @@ MonoBehaviour:
   amplitudFlotacion: 1.23
   frecuenciaFlotacion: 0.9
   velocidadRotacion: {x: 0, y: 0, z: 360}
+  particulasPrefab: {fileID: 1967559791}
+  offsetSalida: 0.02
+  capaDestructor: Destructor
 --- !u!114 &64438998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6505,6 +6508,9 @@ MonoBehaviour:
   amplitudFlotacion: 1.23
   frecuenciaFlotacion: 0.9
   velocidadRotacion: {x: 0, y: 0, z: 360}
+  particulasPrefab: {fileID: 1967559791}
+  offsetSalida: 0.02
+  capaDestructor: Destructor
 --- !u!114 &171437590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27658,6 +27664,9 @@ MonoBehaviour:
   amplitudFlotacion: 1.23
   frecuenciaFlotacion: 0.9
   velocidadRotacion: {x: 0, y: 0, z: 360}
+  particulasPrefab: {fileID: 1967559791}
+  offsetSalida: 0.02
+  capaDestructor: Destructor
 --- !u!114 &646473457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46188,6 +46197,9 @@ MonoBehaviour:
   amplitudFlotacion: 1.23
   frecuenciaFlotacion: 0.9
   velocidadRotacion: {x: 0, y: 0, z: 360}
+  particulasPrefab: {fileID: 1967559791}
+  offsetSalida: 0.02
+  capaDestructor: Destructor
 --- !u!114 &883806117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52559,6 +52571,9 @@ MonoBehaviour:
   amplitudFlotacion: 1.23
   frecuenciaFlotacion: 0.9
   velocidadRotacion: {x: 0, y: 0, z: 360}
+  particulasPrefab: {fileID: 1967559791}
+  offsetSalida: 0.02
+  capaDestructor: Destructor
 --- !u!114 &1000681436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90330,6 +90345,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1967559791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6339312011069035596, guid: aa8918ee4ccbd294283a0657c92c6bbd, type: 3}
+  m_PrefabInstance: {fileID: 8436443174644155846}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1974028659
 GameObject:
   m_ObjectHideFlags: 0

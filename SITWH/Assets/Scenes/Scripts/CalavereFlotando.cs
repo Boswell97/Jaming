@@ -2,36 +2,28 @@ using UnityEngine;
 
 public class CalavereFlotando : MonoBehaviour
 {
-    [Header("Movimiento hacia el jugador")]
-    [Tooltip("Velocidad a la que flota hacia el jugador")]
+    [Header("Mov")]
     public float velocidad = 2f;
 
-    [Header("Flotación vertical (estilo fantasma)")]
-    [Tooltip("Altura máxima de la oscilación")]
+    [Header("Flot")]
     public float amplitudFlotacion = 0.5f;
-    [Tooltip("Velocidad de la oscilación (ciclos por segundo)")]
     public float frecuenciaFlotacion = 2f;
 
-    [Header("Rotación rápida (spinning)")]
-    [Tooltip("Velocidad de rotación en grados por segundo en cada eje")]
-    public Vector3 velocidadRotacion = new Vector3(180f, 180f, 180f); // Valores altos para giro rápido
+    [Header("Rot")]
+    public Vector3 velocidadRotacion = new Vector3(180f, 180f, 180f);
+
+    [Header("Par")]
+    public GameObject particulasPrefab;
+    public float offsetSalida = 0.02f;
+    public string capaDestructor = "Destructor";
 
     private Transform jugador;
     private float yInicial;
 
     void Start()
     {
-        // Busca al jugador por su etiqueta
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            jugador = player.transform;
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró un objeto con la etiqueta 'Player'.");
-        }
-
+        if (player != null) jugador = player.transform;
         yInicial = transform.position.y;
     }
 
@@ -41,29 +33,37 @@ public class CalavereFlotando : MonoBehaviour
 
         Vector3 posicionActual = transform.position;
         Vector3 direccionHorizontal = jugador.position - posicionActual;
-        direccionHorizontal.y = 0; // Ignoramos la diferencia en Y para mantener la altura base
-
-        if (direccionHorizontal.magnitude > 0.01f) // Evitar división por cero
+        direccionHorizontal.y = 0;
+        if (direccionHorizontal.magnitude > 0.01f)
         {
             direccionHorizontal.Normalize();
-            Vector3 desplazamiento = direccionHorizontal * velocidad * Time.deltaTime;
-            transform.Translate(desplazamiento, Space.World);
+            transform.Translate(direccionHorizontal * velocidad * Time.deltaTime, Space.World);
         }
 
-        // 2. Flotación vertical (onda senoidal alrededor de la Y inicial)
         Vector3 nuevaPosicion = transform.position;
         nuevaPosicion.y = yInicial + Mathf.Sin(Time.time * frecuenciaFlotacion) * amplitudFlotacion;
         transform.position = nuevaPosicion;
 
-        // 3. Rotación rápida en todos los ejes (spinning)
         transform.Rotate(velocidadRotacion * Time.deltaTime);
     }
 
-    // Se llama cuando otro collider entra en el trigger de este objeto
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("tocado");
+        if (other.gameObject.layer == LayerMask.NameToLayer(capaDestructor))
+        {
+  
+            Vector3 spawnPoint = GetSurfacePoint(transform.position, other);
+            Instantiate(particulasPrefab, spawnPoint, Quaternion.identity);
 
-    
+            Destroy(other.gameObject);
+        }
+    }
+
+    Vector3 GetSurfacePoint(Vector3 referencePoint, Collider targetCollider)
+    {
+        Vector3 closest = targetCollider.ClosestPoint(referencePoint);
+        Vector3 direction = (closest - targetCollider.bounds.center).normalized;
+        if (direction == Vector3.zero) direction = Vector3.up;
+        return closest + direction * offsetSalida;
     }
 }
